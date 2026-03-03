@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,36 +14,40 @@ public class FicheroEnteros {
             while ((linea = br.readLine()) != null) {
                 lista.add(Integer.parseInt(linea));
             }
-        }catch (Exception e) {
+
+            System.out.println("Suma:");
+            int suma = 0;
+            for(int i : lista) {
+                suma += i;
+            }
+            System.out.println(suma);
+
+            System.out.println();
+            System.out.println("Maximo: ");
+            int maximo = 0;
+            for(int i : lista) {
+                if(i > maximo) {
+                    maximo = i;
+                }
+            }
+            System.out.println(maximo);
+
+            System.out.println();
+
+            System.out.println("Minimo: ");
+            int minimo = lista.get(0);
+            for(int i : lista) {
+                if(i < minimo) {
+                    minimo = i;
+                }
+            }
+            System.out.println(minimo);
+        }catch (NumberFormatException e) {
+            System.out.println("Hay un valor no numerico en el fichero");
+        }catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
-        System.out.println("Suma:");
-        int suma = 0;
-        for(int i : lista) {
-            suma += i;
-        }
-        System.out.println(suma);
 
-        System.out.println();
-        System.out.println("Maximo: ");
-        int maximo = 0;
-        for(int i : lista) {
-            if(i > maximo) {
-                maximo = i;
-            }
-        }
-        System.out.println(maximo);
-
-        System.out.println();
-
-        System.out.println("Minimo: ");
-        int minimo = lista.get(0);
-        for(int i : lista) {
-            if(i < minimo) {
-                minimo = i;
-            }
-        }
-        System.out.println(minimo);
     }
 }
