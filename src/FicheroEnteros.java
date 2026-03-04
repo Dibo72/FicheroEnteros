@@ -9,45 +9,49 @@ import java.util.List;
 public class FicheroEnteros {
     public static void main(String[] args) {
         List<Integer> lista = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader("enteros.txt"))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                lista.add(Integer.parseInt(linea));
-            }
-
-            System.out.println("Suma:");
-            int suma = 0;
-            for(int i : lista) {
-                suma += i;
-            }
-            System.out.println(suma);
-
-            System.out.println();
-            System.out.println("Maximo: ");
-            int maximo = 0;
-            for(int i : lista) {
-                if(i > maximo) {
-                    maximo = i;
+        boolean seguir = true;
+        while (seguir) {
+            try (BufferedReader br = new BufferedReader(new FileReader("enteros.txt"))) {
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    try {
+                        lista.add(Integer.parseInt(linea));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Hay un valor no numerico en el fichero");
+                    }
                 }
-            }
-            System.out.println(maximo);
 
-            System.out.println();
-
-            System.out.println("Minimo: ");
-            int minimo = lista.get(0);
-            for(int i : lista) {
-                if(i < minimo) {
-                    minimo = i;
+                System.out.println("Suma:");
+                int suma = 0;
+                for (int i : lista) {
+                    suma += i;
                 }
+                System.out.println(suma);
+
+                System.out.println();
+                System.out.println("Maximo: ");
+                int maximo = 0;
+                for (int i : lista) {
+                    if (i > maximo) {
+                        maximo = i;
+                    }
+                }
+                System.out.println(maximo);
+
+                System.out.println();
+
+                System.out.println("Minimo: ");
+                int minimo = lista.get(0);
+                for (int i : lista) {
+                    if (i < minimo) {
+                        minimo = i;
+                    }
+                }
+                System.out.println(minimo);
+                seguir = false;
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
-            System.out.println(minimo);
-        }catch (NumberFormatException e) {
-            System.out.println("Hay un valor no numerico en el fichero");
-        }catch (IOException e) {
-            System.out.println(e.getMessage());
         }
-
-
     }
 }
